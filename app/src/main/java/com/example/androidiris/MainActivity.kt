@@ -7,7 +7,7 @@ import com.example.androidiris.auth.Authenticate
 
 class MainActivity : AppCompatActivity() {
     companion object{
-        // var auth : Authenticate =  Authenticate()
+        var auth : Authenticate =  Authenticate()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
