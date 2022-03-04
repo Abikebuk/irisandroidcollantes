@@ -44,6 +44,6 @@
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Button" />
+            android:text="Friends" />
     </LinearLayout>
 </FrameLayout>
