@@ -4,6 +4,7 @@ import com.example.androidiris.schemas.Likes
 import java.util.*
 
 data class Post(
+    val id: String? = null,
     val userId: String? = null,
     val title: String? = null,
     val date: Date? = null,

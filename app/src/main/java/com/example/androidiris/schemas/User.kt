@@ -1,6 +1,7 @@
 package com.example.androidiris.schemas
 
 data class User(
+    var id: String? = null,
     var firstname: String? = null,
     var lastname: String? = null,
     var mail: String? = null,

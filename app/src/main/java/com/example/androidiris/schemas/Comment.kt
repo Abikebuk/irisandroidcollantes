@@ -3,6 +3,7 @@ package com.example.androidiris.schemas
 import java.util.*
 
 data class Comment (
+    val id: String? = null,
     val userId: String? = null,
     val date: Date? = null,
     val text: String? = null,

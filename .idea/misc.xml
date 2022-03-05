@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/drawable/my_button.xml" value="0.1" />
-        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_home.xml" value="0.22" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_login.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_sign_in.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/activity_sign_up.xml" value="0.28541666666666665" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_chat.xml" value="0.22" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_content.xml" value="0.28541666666666665" />
-        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_menu.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_friend_list.xml" value="0.2109375" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_menu.xml" value="0.17772511848341233" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_news.xml" value="0.25" />
         <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_post.xml" value="0.15104166666666666" />
+        <entry key="..\:/Users/Rettana/AndroidStudioProjects/AndroidIris/app/src/main/res/layout/fragment_profile.xml" value="0.22291666666666668" />
       </map>
     </option>
   </component>

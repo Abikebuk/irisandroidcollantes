@@ -64,11 +64,11 @@ class Authenticate constructor() : AppCompatActivity() {
         return Firebase.auth.currentUser
     }
 
-    fun createNewUser(email: String, password: String, firstname: String, lastname: String, age: Int, phone: String): FirebaseUser? {
+    fun createNewUser(id : String, email: String, password: String, firstname: String, lastname: String, age: Int, phone: String): FirebaseUser? {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(){ task ->
                 if (task.isSuccessful){
-                    if( UserHandler.create(email, firstname, lastname, age, phone) != null){
+                    if( UserHandler.create(id, email, firstname, lastname, age, phone) != null){
                         Log.d(TAG, "createUserWithEmail:success")
                     }else {
                         Log.w(TAG, "createFirestoreUser:failure")
