@@ -13,13 +13,14 @@ class UserHandler {
         var dbName = "users"
 
         fun create(
+            id: String,
             email: String,
             firstname: String,
             lastname: String,
             age: Int,
             phone: String
         ): DocumentReference? {
-            val user = User(firstname, lastname, email, age, phone)
+            val user = User(id, firstname, lastname, email, age, phone)
             var res: DocumentReference? = null
             Firebase.firestore.collection(dbName).add(user)
                 .addOnSuccessListener { docRef ->
@@ -49,6 +50,5 @@ class UserHandler {
             val docRef = Firebase.firestore.collection(dbName).document(userId).update("friends", FieldValue.arrayUnion(friendId))
         }
 
-        fun queryUser(string User) :
     }
 }

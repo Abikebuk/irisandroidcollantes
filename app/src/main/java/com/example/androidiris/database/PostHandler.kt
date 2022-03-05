@@ -14,6 +14,7 @@ class PostHandler {
         var dbName = "posts"
 
         fun create(
+            id: String,
             userId: String,
             title: String? = null,
             date: Date,
@@ -22,7 +23,7 @@ class PostHandler {
             video: String? = null,
             likes: Likes? = null
         ) : DocumentReference? {
-            val post = Post(userId, title, date, text, image, video, likes)
+            val post = Post(id, userId, title, date, text, image, video, likes)
             var res: DocumentReference? = null
             Firebase.firestore.collection(dbName).add(post)
                 .addOnSuccessListener { docRef ->

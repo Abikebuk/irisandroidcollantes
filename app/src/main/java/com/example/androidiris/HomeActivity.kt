@@ -2,6 +2,9 @@ package com.example.androidiris
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_post.view.*
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9,25 +12,27 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
     }
 
-    /*class Posts : AppCompatActivity(), View.OnClickListener{
-    var post =  Post("ramos",
-        "Test 1",
-        Calendar.getInstance().time,
-        "Un simple test",
-        null,
-        null,
-        Likes(listOf("5")))
+    fun changeView(view:ContentView){
+        var fragment : Fragment? = null;
+        Log.d("AAAAZERGF", view.name)
+        fragment = when (view){
+            ContentView.friends -> FriendListFragment.newInstance("a","a")
+            ContentView.news -> NewsFragment.newInstance("a","a")
+            ContentView.profile -> ProfileFragment.newInstance("a","a")
+            ContentView.chat -> ChatFragment.newInstance("a","a")
+        }
+        val tr = supportFragmentManager.beginTransaction()
+        tr.replace(R.id.contentContainer, fragment)
+        tr.commitAllowingStateLoss()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_posts)
-        Log.d("testText", "Create")
     }
 
-    override fun onClick(p0: View?) {
-        var testText = findViewById<TextView>(R.id.testText)
-        testText.setText("Test 2")
-        Log.d("testText", "Fonctionne")
+    companion object{
+        enum class ContentView{
+            friends,
+            news,
+            profile,
+            chat
+        }
     }
-}*/
 }
