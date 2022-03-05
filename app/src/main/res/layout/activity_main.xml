@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:onClick="onClickToHomeButton"
         android:text="Home"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="6dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
