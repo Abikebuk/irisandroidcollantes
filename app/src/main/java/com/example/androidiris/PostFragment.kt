@@ -2,6 +2,8 @@
 package com.example.androidiris
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,13 +14,11 @@ import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import com.example.androidiris.databinding.ActivityHomeBinding
 import com.example.androidiris.databinding.FragmentPostBinding
-import kotlinx.android.synthetic.main.fragment_news.view.*
-import kotlinx.android.synthetic.main.fragment_post.view.*
+import com.example.androidiris.schemas.Post
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "post"
 
 /**
  * A simple [Fragment] subclass.
@@ -27,14 +27,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class PostFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: Int? = null
-    private var param2: String? = null
+    private var post: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getInt(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            post = it.getParcelable<Post>(ARG_PARAM1)
         }
     }
 
@@ -42,10 +40,9 @@ class PostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("ATEAET", param1.toString())
+        Log.d("ATEAET", post.toString())
         val binding:FragmentPostBinding = FragmentPostBinding.inflate(inflater,container,false)
         var view = binding.root
-        param1?.let { view.postWrapper.setPadding(it) }
         // Inflate the layout for this fragment
         return view
     }
@@ -61,11 +58,10 @@ class PostFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Int, param2: String) =
+        fun newInstance(post : Parcelable) =
             PostFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(ARG_PARAM1, post)
                 }
             }
     }

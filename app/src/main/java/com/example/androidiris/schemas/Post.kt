@@ -1,11 +1,14 @@
 package com.example.androidiris.schemas
 
+import android.os.Parcelable
 import com.example.androidiris.schemas.Likes
 import com.google.firebase.firestore.Exclude
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 import java.util.*
 
-data class Post(
+@Parcelize
+data class Post (
     @Exclude
     var id: String? = null,
     val userId: String? = null,
@@ -15,4 +18,4 @@ data class Post(
     val image: String? = null,
     val video: String? = null,
     val likes: Likes? = null
-)
+) : Parcelable

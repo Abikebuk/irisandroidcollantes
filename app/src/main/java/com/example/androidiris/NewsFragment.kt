@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.database.PostHandler
 import com.example.androidiris.databinding.FragmentNewsBinding
 import com.example.androidiris.databinding.FragmentPostBinding
-import kotlinx.android.synthetic.main.fragment_news.*
-import kotlinx.android.synthetic.main.fragment_news.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,14 +31,15 @@ class NewsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        val testa = PostFragment.newInstance(0, "")
-        val testb = PostFragment.newInstance(0, "")
-        val testc = PostFragment.newInstance(0, "")
-        val tr = childFragmentManager.beginTransaction()
-        tr.add(R.id.testWrapper,testa)
-        tr.add(R.id.testWrapper,testb)
-        tr.add(R.id.testWrapper,testc)
-        tr.commitAllowingStateLoss()
+        PostHandler.getAllFromUser("PgMIz4Ely7WluhcbhXGe")
+            .addOnSuccessListener { querySnapshot ->
+                val documents = PostHandler.querySnapshotToPosts(querySnapshot)
+                val testa = PostFragment.newInstance(documents[0])
+                val tr = childFragmentManager.beginTransaction()
+                tr.add(R.id.testWrapper,testa)
+                tr.commitAllowingStateLoss()
+            }
+
     }
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class NewsFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment newsFragment.
          */
-        // TODO: Rename and change types and number of parameters
+        // TODO: Rename and change types abrand number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             NewsFragment().apply {
