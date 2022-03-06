@@ -79,4 +79,8 @@ class Authenticate constructor() : AppCompatActivity() {
             }
         return Firebase.auth.currentUser
     }
+
+    companion object{
+        var client : Authenticate =  Authenticate()
+    }
 }

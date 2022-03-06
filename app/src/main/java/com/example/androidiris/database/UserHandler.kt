@@ -49,6 +49,5 @@ class UserHandler {
         fun addFriend(userId : String, friendId: String){
             val docRef = Firebase.firestore.collection(dbName).document(userId).update("friends", FieldValue.arrayUnion(friendId))
         }
-
     }
 }

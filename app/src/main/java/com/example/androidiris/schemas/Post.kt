@@ -1,10 +1,13 @@
 package com.example.androidiris.schemas
 
 import com.example.androidiris.schemas.Likes
+import com.google.firebase.firestore.Exclude
+import java.time.LocalDateTime
 import java.util.*
 
 data class Post(
-    val id: String? = null,
+    @Exclude
+    var id: String? = null,
     val userId: String? = null,
     val title: String? = null,
     val date: Date? = null,

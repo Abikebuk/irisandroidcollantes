@@ -5,8 +5,11 @@ import com.example.androidiris.schemas.Likes
 import com.example.androidiris.schemas.Post
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PostHandler {
     companion object{
@@ -14,7 +17,7 @@ class PostHandler {
         var dbName = "posts"
 
         fun create(
-            id: String,
+            id: String? = null,
             userId: String,
             title: String? = null,
             date: Date,
@@ -35,10 +38,20 @@ class PostHandler {
             return res
         }
 
-        /**
-        fun get(postId : String): Post?{
-            val docRef = Firebase.firestore.collection(dbName).where
+
+        fun getAllFromUser(userId : String): ArrayList<Post>{
+            val res : ArrayList<Post> = ArrayList()
+            val docRef = Firebase.firestore.collection(dbName).whereEqualTo("userId", userId).get()
+            docRef.addOnSuccessListener { documents ->
+                for (doc in documents){
+                    val post = doc.toObject<Post>()
+                    post.id = doc.id
+                    Log.d(TAG, post.toString())
+                    res.add(post)
+                }
+            }
+            return res
         }
-        */
+
     }
 }
