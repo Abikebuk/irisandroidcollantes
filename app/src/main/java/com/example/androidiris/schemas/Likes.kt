@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Likes(
-    @Exclude
+    @Exclude @JvmField
     val id: String? = null,
     val users: List<String>? = null
     ) : Parcelable

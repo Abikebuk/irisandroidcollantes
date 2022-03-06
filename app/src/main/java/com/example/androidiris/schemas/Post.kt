@@ -9,7 +9,7 @@ import java.util.*
 
 @Parcelize
 data class Post (
-    @Exclude
+    @Exclude @JvmField
     var id: String? = null,
     val userId: String? = null,
     val title: String? = null,

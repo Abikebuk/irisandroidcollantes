@@ -7,7 +7,7 @@ import java.util.*
 
 @Parcelize
 data class Comment (
-    @Exclude
+    @Exclude @JvmField
     val id: String? = null,
     val userId: String? = null,
     val date: Date? = null,
