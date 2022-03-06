@@ -3,7 +3,10 @@ package com.example.androidiris.database
 import android.util.Log
 import com.example.androidiris.schemas.Likes
 import com.example.androidiris.schemas.Post
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -39,19 +42,20 @@ class PostHandler {
         }
 
 
-        fun getAllFromUser(userId : String): ArrayList<Post>{
-            val res : ArrayList<Post> = ArrayList()
+        fun getAllFromUser(userId : String): Task<QuerySnapshot> {
             val docRef = Firebase.firestore.collection(dbName).whereEqualTo("userId", userId).get()
-            docRef.addOnSuccessListener { documents ->
-                for (doc in documents){
-                    val post = doc.toObject<Post>()
-                    post.id = doc.id
-                    Log.d(TAG, post.toString())
-                    res.add(post)
-                }
-            }
-            return res
+            return docRef
         }
 
+        fun querySnapshotToPosts (querySnapshot: QuerySnapshot): ArrayList<Post> {
+            var res : ArrayList<Post> = ArrayList()
+            for (doc in querySnapshot){
+                val post = doc.toObject<Post>()
+                post.id = doc.id
+                Log.d(TAG, post.toString())
+                res += post
+            }
+            return res;
+        }
     }
 }
