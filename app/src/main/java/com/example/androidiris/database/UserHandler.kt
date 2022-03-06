@@ -20,12 +20,11 @@ class UserHandler {
             age: Int,
             phone: String
         ): DocumentReference? {
-            val user = User(id, firstname, lastname, email, age, phone)
+            val user = User(null, firstname, lastname, email, age, phone)
             var res: DocumentReference? = null
-            Firebase.firestore.collection(dbName).add(user)
+            Firebase.firestore.collection(dbName).document(id).set(user)
                 .addOnSuccessListener { docRef ->
-                    Log.d(TAG, "User created with ID : ${docRef.id}")
-                    res = docRef
+                    Log.d(TAG, "User created with ID : ${id}")
                 }.addOnFailureListener { e ->
                     Log.d(TAG, "Error creating a new user.", e)
                 }
@@ -46,8 +45,10 @@ class UserHandler {
             val docRef = Firebase.firestore.collection(dbName).document(user.mail!!).set(user);
         }
 
-        fun addFriend(userId : String, friendId: String){
-            val docRef = Firebase.firestore.collection(dbName).document(userId).update("friends", FieldValue.arrayUnion(friendId))
+        fun addFriend(userId: String, friendId: String) {
+            Log.d(TAG, "Adding friend ${friendId} to ${userId}")
+            val docRef = Firebase.firestore.collection(dbName).document(userId)
+                .update("friends", FieldValue.arrayUnion(friendId))
         }
     }
 }

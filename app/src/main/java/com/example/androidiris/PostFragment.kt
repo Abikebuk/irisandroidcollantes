@@ -9,10 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginTop
-import androidx.core.view.setPadding
-import androidx.databinding.DataBindingUtil
-import com.example.androidiris.databinding.ActivityHomeBinding
 import com.example.androidiris.databinding.FragmentPostBinding
 import com.example.androidiris.schemas.Post
 

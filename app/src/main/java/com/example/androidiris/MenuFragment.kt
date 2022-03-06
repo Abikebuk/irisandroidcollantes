@@ -22,7 +22,6 @@ class MenuFragment : Fragment() , View.OnClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
         view.findViewById<Button>(R.id.MenuFriendsButton).setOnClickListener(this)
