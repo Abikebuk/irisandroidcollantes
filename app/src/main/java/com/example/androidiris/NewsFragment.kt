@@ -40,12 +40,6 @@ class NewsFragment : Fragment() {
         tr.add(R.id.testWrapper,testb)
         tr.add(R.id.testWrapper,testc)
         tr.commitAllowingStateLoss()
-
-        /*
-        childFragmentManager.beginTransaction().add(R.id.testWrapper,testb).commit()
-        childFragmentManager.beginTransaction().add(R.id.testWrapper,testa).commit()
-        childFragmentManager.beginTransaction().add(R.id.testWrapper,testc).commit()
-        */
     }
 
     override fun onCreateView(
