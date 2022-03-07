@@ -1,10 +1,12 @@
 package com.example.androidiris
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.database.UserHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,12 +29,28 @@ class FriendListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val currentUser =  "Bz7MWLrjTRdkespEGu4ySb2GqQy1"
+        UserHandler.get(currentUser)
+            .addOnSuccessListener { documentSnapshot ->
+                val user = UserHandler.documentSnapshotToDocument(documentSnapshot);
+                if (user != null) {
+                    val tr = childFragmentManager.beginTransaction()
+                    for ( friendId in user.friends!!){
+                        Log.d("ZRGERGK", friendId )
+                        val friendFragment = FriendFragment.newInstance(friendId)
+                        tr.add(R.id.friendListWrapper, friendFragment)
+                    }
+                    tr.commitAllowingStateLoss()
+                }
+            }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_friend_list, container, false)
     }

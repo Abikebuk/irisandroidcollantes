@@ -2,7 +2,9 @@ package com.example.androidiris.database
 
 import android.util.Log
 import com.example.androidiris.schemas.User
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.*
 import com.google.firebase.ktx.Firebase
@@ -31,14 +33,9 @@ class UserHandler {
             return res
         }
 
-        fun get(userId: String): User? {
-            var res: User? = null
+        fun get(userId: String): Task<DocumentSnapshot> {
             val docRef = Firebase.firestore.collection(dbName).document(userId)
-            docRef.get().addOnSuccessListener { documentSnapshot ->
-                res = documentSnapshot.toObject<User>()
-                Log.d(TAG, "Get : ${res.toString()}")
-            }
-            return res
+            return docRef.get()
         }
 
         fun update(user: User) {
@@ -49,6 +46,10 @@ class UserHandler {
             Log.d(TAG, "Adding friend ${friendId} to ${userId}")
             val docRef = Firebase.firestore.collection(dbName).document(userId)
                 .update("friends", FieldValue.arrayUnion(friendId))
+        }
+
+        fun documentSnapshotToDocument(documentSnapshot : DocumentSnapshot): User? {
+            return documentSnapshot.toObject<User>()
         }
     }
 }
