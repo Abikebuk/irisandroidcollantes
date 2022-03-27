@@ -10,10 +10,19 @@ import com.example.androidiris.databinding.ActivityMainBinding
 import com.example.androidiris.auth.Authenticate
 import com.example.androidiris.database.PostHandler
 import com.example.androidiris.database.UserHandler
+import com.example.androidiris.database.UserQuery
+import com.squareup.okhttp.Dispatcher
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope {
+    private var job: Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         //setContentView(binding.root)
         setContentView(R.layout.activity_main)
-
+        var uq = UserQuery("a b")
+        var async = GlobalScope.launch{
+            uq.get()
+        }
         // DEV
         /*
         PostHandler.create(
@@ -54,7 +66,6 @@ class MainActivity : AppCompatActivity() {
             "c",
         )
          */
-
         UserHandler.addFriend("Bz7MWLrjTRdkespEGu4ySb2GqQy1", "hTJ9EKac5IOp8fm0rbZFOuujTdi2")
     }
 
@@ -62,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, HomeActivity::class.java)
         startActivity(intent)
     }
-
 
 
 }

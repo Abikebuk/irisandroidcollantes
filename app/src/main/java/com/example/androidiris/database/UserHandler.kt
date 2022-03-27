@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.*
 import com.google.firebase.ktx.Firebase
 
@@ -48,8 +49,29 @@ class UserHandler {
                 .update("friends", FieldValue.arrayUnion(friendId))
         }
 
+        fun removeFriend(userId: String, friendId: String){
+            Log.d(TAG, "Removing friend ${friendId} to ${userId}")
+            val docRef = Firebase.firestore.collection(dbName).document(userId)
+                .update("friends", FieldValue.arrayRemove(friendId))
+        }
+
+        fun searchFriend(query : String){
+            query.split(' ')
+        }
+
         fun documentSnapshotToDocument(documentSnapshot : DocumentSnapshot): User? {
+            val user = documentSnapshot.toObject<User>()
+            user?.id = documentSnapshot.id
             return documentSnapshot.toObject<User>()
+        }
+        fun documentSnapshotToDocument(querySnapshot : QuerySnapshot): List<User> {
+            val users = ArrayList<User>()
+            for(user in querySnapshot){
+                val u = user.toObject<User>()
+                u.id = user.id
+                users.add(u)
+            }
+            return users.toList()
         }
     }
 }

@@ -17,8 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="friend name" />
+            android:insetBottom="0dp" />
 
         <Button
             android:id="@+id/friendChatButton"
