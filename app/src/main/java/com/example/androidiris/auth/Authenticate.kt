@@ -7,6 +7,8 @@ import com.example.androidiris.database.UserHandler
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -40,8 +42,8 @@ class Authenticate constructor() : AppCompatActivity() {
         }
     }
 
-    fun signInWithPassword(username: String, password: String): FirebaseUser? {
-        Firebase.auth.signInWithEmailAndPassword(username, password)
+    fun signInWithPassword(username: String, password: String): Task<AuthResult> {
+        return Firebase.auth.signInWithEmailAndPassword(username, password)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful){
                     Log.d(TAG, "signInWithEmail:success")
@@ -49,7 +51,6 @@ class Authenticate constructor() : AppCompatActivity() {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                 }
             }
-        return Firebase.auth.currentUser
     }
 
     fun signOut() {
@@ -64,8 +65,8 @@ class Authenticate constructor() : AppCompatActivity() {
         return Firebase.auth.currentUser
     }
 
-    fun createNewUser(email: String, password: String, firstname: String, lastname: String, age: Int, phone: String): FirebaseUser? {
-        Firebase.auth.createUserWithEmailAndPassword(email, password)
+    fun createNewUser(email: String, password: String, firstname: String, lastname: String, age: Int, phone: String): Task<AuthResult> {
+        return Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(){ task ->
                 if (task.isSuccessful){
                     if( getCurrentUser()?.let { UserHandler.create(it.uid, email, firstname, lastname, age, phone) } != null){
@@ -77,7 +78,6 @@ class Authenticate constructor() : AppCompatActivity() {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                 }
             }
-        return Firebase.auth.currentUser
     }
 
     companion object{

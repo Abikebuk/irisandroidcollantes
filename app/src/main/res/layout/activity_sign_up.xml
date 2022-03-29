@@ -52,12 +52,12 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="271dp"
             android:layout_marginEnd="244dp"
-            android:text="Date de naissance :"
+            android:text="Age :"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/pswSignin"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
@@ -75,7 +75,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/mailSignin"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
@@ -93,7 +93,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/surnameSignin"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
@@ -111,7 +111,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/nameSignin"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
@@ -141,7 +141,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/birthSignin"
             android:layout_width="358dp"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
@@ -152,26 +152,8 @@
             android:layout_marginEnd="25dp"
             android:background="@drawable/my_edittext"
             android:ems="10"
-            android:hint="JJ/MM/AAAA"
+            android:hint="i.e 23"
             android:inputType="date"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName6"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="218dp"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/my_edittext"
-            android:ems="10"
-            android:hint="Mot de passe"
-            android:inputType="textPassword"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textSize="14sp" />
@@ -213,7 +195,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonSignin"
             android:layout_width="358dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

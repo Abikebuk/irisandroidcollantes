@@ -29,7 +29,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         //setContentView(binding.root)
-        setContentView(R.layout.activity_main)
+        if (Authenticate.client.getCurrentUser()==null)
+        {
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }else
+        {
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         var uq = UserQuery("a b")
         var async = GlobalScope.launch{
             uq.get()
