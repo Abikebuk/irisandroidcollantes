@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
         Log.d("AAAAZERGF", view.name)
         fragment = when (view){
             ContentView.friends -> FriendListFragment.newInstance("a","a")
-            ContentView.news -> NewsFragment.newInstance("a","a")
+            ContentView.news -> newsFragment.newInstance("a","a")
             ContentView.profile -> ProfileFragment.newInstance("a","a")
             ContentView.chat -> ChatFragment.newInstance("a","a")
         }
