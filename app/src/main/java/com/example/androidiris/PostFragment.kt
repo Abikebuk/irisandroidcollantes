@@ -2,15 +2,19 @@
 package com.example.androidiris
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.databinding.FragmentPostBinding
+import com.example.androidiris.schemas.Post
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "post"
 
 /**
  * A simple [Fragment] subclass.
@@ -19,14 +23,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class PostFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var post: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            post = it.getParcelable<Post>(ARG_PARAM1)
         }
     }
 
@@ -34,8 +36,11 @@ class PostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("ATEAET", post.toString())
+        val binding:FragmentPostBinding = FragmentPostBinding.inflate(inflater,container,false)
+        var view = binding.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false)
+        return view
     }
 
     companion object {
@@ -49,11 +54,10 @@ class PostFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(post : Parcelable) =
             PostFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(ARG_PARAM1, post)
                 }
             }
     }

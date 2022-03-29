@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.database.PostHandler
+import com.example.androidiris.databinding.FragmentNewsBinding
+import com.example.androidiris.databinding.FragmentPostBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [newsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class newsFragment : Fragment() {
+class NewsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -27,6 +30,16 @@ class newsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        PostHandler.getAllFromUser("PgMIz4Ely7WluhcbhXGe")
+            .addOnSuccessListener { querySnapshot ->
+                val documents = PostHandler.querySnapshotToPosts(querySnapshot)
+                val testa = PostFragment.newInstance(documents[0])
+                val tr = childFragmentManager.beginTransaction()
+                tr.add(R.id.testWrapper,testa)
+                tr.commitAllowingStateLoss()
+            }
+
     }
 
     override fun onCreateView(
@@ -46,10 +59,10 @@ class newsFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment newsFragment.
          */
-        // TODO: Rename and change types and number of parameters
+        // TODO: Rename and change types abrand number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            newsFragment().apply {
+            NewsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
