@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import com.example.androidiris.auth.Authenticate
 import com.example.androidiris.database.UserHandler
 import com.example.androidiris.database.UserQuery
 import com.example.androidiris.databinding.FragmentFriendListBinding
@@ -28,7 +29,7 @@ class FriendListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val currentUser =  "Bz7MWLrjTRdkespEGu4ySb2GqQy1"
+    private val currentUser = Authenticate.client.getCurrentUser()?.uid
     private val currentFriendList = ArrayList<String>()
 
 
@@ -37,6 +38,9 @@ class FriendListFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        if (currentUser != null) {
+            Log.d("zefoijzerfioj", currentUser)
         }
 
     }
@@ -70,32 +74,34 @@ class FriendListFragment : Fragment() {
     }
 
     private fun getFriends(showFriends : Boolean){
-        UserHandler.get(currentUser)
-            .addOnSuccessListener { documentSnapshot ->
-                currentFriendList.clear()
-                val user = UserHandler.documentSnapshotToDocument(documentSnapshot);
-                if (user != null) {
+        if (currentUser != null) {
+            UserHandler.get(currentUser)
+                .addOnSuccessListener { documentSnapshot ->
+                    currentFriendList.clear()
+                    val user = UserHandler.documentSnapshotToDocument(documentSnapshot);
+                    if (user != null) {
 
-                    val tr = childFragmentManager.beginTransaction()
-                    for ( friendId in user.friends!!){
-                        Log.d("ZRGERGK", friendId )
-                        if(showFriends){
-                            val friendFragment = FriendFragment.newInstance(currentUser, friendId, true)
-                            tr.add(R.id.friendListWrapper, friendFragment)
+                        val tr = childFragmentManager.beginTransaction()
+                        for ( friendId in user.friends!!){
+                            Log.d("ZRGERGK", friendId )
+                            if(showFriends){
+                                val friendFragment = FriendFragment.newInstance(currentUser, friendId, true)
+                                tr.add(R.id.friendListWrapper, friendFragment)
+                            }
+                            currentFriendList.add(friendId)
                         }
-                        currentFriendList.add(friendId)
-                    }
-                    if(showFriends){
-                        tr.commitAllowingStateLoss()
+                        if(showFriends){
+                            tr.commitAllowingStateLoss()
+                        }
                     }
                 }
-            }
+        }
     }
 
     private fun searchUsers (query : String){
         getFriends(false)
         clearFragments()
-        if (query != null && query != ""){
+        if (query != ""){
             Log.d("ZEFIK",  "looking for ${query}")
             val uq = UserQuery(query)
             var async = GlobalScope.launch {
@@ -107,7 +113,11 @@ class FriendListFragment : Fragment() {
                         user._user.id?.let {
                             Log.d("EFIOZEFI", "it : ${it.toString()} , ${currentFriendList.contains(it)}")
 
-                            FriendFragment.newInstance(currentUser, it, currentFriendList.contains(it))
+                            if (currentUser != null) {
+                                FriendFragment.newInstance(currentUser, it, currentFriendList.contains(it))
+                            }else {
+                                null
+                            }
                         }
                     if (friendFragment != null) {
                         tr.add(R.id.friendListWrapper, friendFragment)
