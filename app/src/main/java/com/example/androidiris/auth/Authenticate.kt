@@ -54,11 +54,7 @@ class Authenticate constructor() : AppCompatActivity() {
     }
 
     fun signOut() {
-        AuthUI.getInstance()
-            .signOut(this)
-            .addOnCompleteListener {
-                // task @TODO
-            }
+        FirebaseAuth.getInstance().signOut()
     }
 
     fun getCurrentUser() : FirebaseUser? {
