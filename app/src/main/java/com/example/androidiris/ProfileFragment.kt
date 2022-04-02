@@ -1,10 +1,12 @@
 package com.example.androidiris
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.auth.Authenticate
 import com.example.androidiris.database.UserHandler
 import com.example.androidiris.databinding.FragmentProfileBinding
 
@@ -22,7 +24,7 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var currentUser: String = "Bz7MWLrjTRdkespEGu4ySb2GqQy1"
+    private var currentUser = Authenticate.client.getCurrentUser()?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +40,17 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var binding = FragmentProfileBinding.inflate(inflater, container, false)
-        UserHandler.get(currentUser).addOnSuccessListener { documentSnapchot ->
-            var user = UserHandler.documentSnapshotToDocument(documentSnapchot)
-            if (user != null) {
-                binding.firstnameProfile.text = "${user.firstname} ${user.lastname}"
+        currentUser?.let {
+            UserHandler.get(it).addOnSuccessListener { documentSnapchot ->
+                var user = UserHandler.documentSnapshotToDocument(documentSnapchot)
+                Log.d("aaaa", user.toString())
+                if (user != null) {
+                    binding.firstnameProfile.text = "${user.firstname} ${user.lastname}"
+                    binding.ageProfile.text = "Age : ${user.age.toString()}"
+                }
             }
         }
-
+        currentUser?.let { Log.d("aaaa", it) }
         return binding.root
     }
 
