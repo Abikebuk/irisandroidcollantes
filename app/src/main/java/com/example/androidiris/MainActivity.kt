@@ -38,11 +38,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(intent)
         }
-
-        var uq = UserQuery("a b")
-        var async = GlobalScope.launch{
-            uq.get()
-        }
         // DEV
         /*
         PostHandler.create(

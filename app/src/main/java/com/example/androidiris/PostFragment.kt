@@ -36,7 +36,6 @@ class PostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("ATEAET", post.toString())
         val binding:FragmentPostBinding = FragmentPostBinding.inflate(inflater,container,false)
         var view = binding.root
         // Inflate the layout for this fragment

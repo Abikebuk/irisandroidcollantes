@@ -79,7 +79,7 @@ class FriendListFragment : Fragment() {
                 .addOnSuccessListener { documentSnapshot ->
                     currentFriendList.clear()
                     val user = UserHandler.documentSnapshotToDocument(documentSnapshot);
-                    if (user != null) {
+                    if (user?.friends != null) {
 
                         val tr = childFragmentManager.beginTransaction()
                         for ( friendId in user.friends!!){
