@@ -1,14 +1,22 @@
 package com.example.androidiris
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.example.androidiris.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        val binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding.newPostButton.setOnClickListener {
+            val intent = Intent(this@HomeActivity, CreatePostActivity::class.java)
+            Log.d("szdfgtfqergfdsfq","szdffdgdsqsdg")
+            startActivity(intent)
+        }
+        setContentView(binding.root)
     }
 
     fun changeView(view:ContentView){
@@ -23,7 +31,6 @@ class HomeActivity : AppCompatActivity() {
         val tr = supportFragmentManager.beginTransaction()
         tr.replace(R.id.contentContainer, fragment)
         tr.commitAllowingStateLoss()
-
     }
 
     companion object{

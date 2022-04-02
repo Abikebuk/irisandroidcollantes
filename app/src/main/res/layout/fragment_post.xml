@@ -57,15 +57,30 @@
                 android:layout_height="57dp"
                 android:layout_weight="0"
                 android:background="#00ACC1"
-                android:clickable="false" />
+                android:clickable="false" >
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@tools:sample/avatars" />
+            </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/name_profile"
                 android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:layout_weight="1"
                 android:background="#039BE5">
 
+                <TextView
+                    android:id="@+id/nameProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </FrameLayout>
 
             <FrameLayout
@@ -89,11 +104,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_posts">
 
-            <FrameLayout
-                android:id="@+id/text_posts"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#5E35B1" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titlePost"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/contentPost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="TextView"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
 

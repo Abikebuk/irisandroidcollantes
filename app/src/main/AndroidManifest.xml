@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidIris">
         <activity
+            android:name=".CreatePostActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

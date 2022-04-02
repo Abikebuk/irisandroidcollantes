@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.auth.Authenticate
+import com.example.androidiris.database.UserHandler
 import com.example.androidiris.databinding.FragmentPostBinding
 import com.example.androidiris.schemas.Post
 
@@ -23,7 +25,8 @@ private const val ARG_PARAM1 = "post"
  */
 class PostFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var post: Parcelable? = null
+    private var post: Post? = null
+    private var currentUser = Authenticate.client.getCurrentUser()?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +40,15 @@ class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding:FragmentPostBinding = FragmentPostBinding.inflate(inflater,container,false)
-        var view = binding.root
-        // Inflate the layout for this fragment
-        return view
+        binding.titlePost.text = post?.title ?: ""
+        binding.contentPost.text = post?.text ?: ""
+        post?.userId?.let { UserHandler.get(it).addOnSuccessListener{documentSnapshot->
+            val user = UserHandler.documentSnapshotToDocument(documentSnapshot)
+            if (user != null) {
+                binding.nameProfile.text = "${user.lastname} ${user.firstname}"
+            }
+        } }
+        return binding.root
     }
 
     companion object {

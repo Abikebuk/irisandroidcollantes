@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androidiris.auth.Authenticate
 import com.example.androidiris.database.PostHandler
 import com.example.androidiris.databinding.FragmentNewsBinding
 import com.example.androidiris.databinding.FragmentPostBinding
@@ -23,6 +24,7 @@ class NewsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var currentUser = Authenticate.client.getCurrentUser()?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +33,18 @@ class NewsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        PostHandler.getAllFromUser("PgMIz4Ely7WluhcbhXGe")
-            .addOnSuccessListener { querySnapshot ->
-                val documents = PostHandler.querySnapshotToPosts(querySnapshot)
-                val testa = PostFragment.newInstance(documents[0])
-                val tr = childFragmentManager.beginTransaction()
-                tr.add(R.id.testWrapper,testa)
-                tr.commitAllowingStateLoss()
-            }
+        currentUser?.let {
+            PostHandler.getAllFromUser(it)
+                .addOnSuccessListener { querySnapshot ->
+                    val documents = PostHandler.querySnapshotToPosts(querySnapshot)
+                    val tr = childFragmentManager.beginTransaction()
+                    for(doc in documents){
+                        val post = PostFragment.newInstance(doc)
+                        tr.add(R.id.testWrapper,post)
+                    }
+                    tr.commitAllowingStateLoss()
+                }
+        }
 
     }
 
