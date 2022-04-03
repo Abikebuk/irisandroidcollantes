@@ -45,6 +45,7 @@ class UserQuery (query: String){
     }
 
     private fun executeQuery(field: String, word: String): Task<QuerySnapshot> {
+        Log.d("EFIOZEFI", "${field} : ${word}")
         return Firebase.firestore.collection(UserHandler.dbName).whereEqualTo(field, word).get()
             .addOnSuccessListener { querySnapshot ->
                 Log.d("EFIOZEFI", querySnapshot.documents.toString())
@@ -59,7 +60,7 @@ class UserQuery (query: String){
     }
 
     suspend fun get(): ArrayList<WeightedResult> {
-        val words = query.split("")
+        val words = query.split(" ")
         val async = GlobalScope.async{
             withContext(Dispatchers.Default){
                 for ( word in words ){
