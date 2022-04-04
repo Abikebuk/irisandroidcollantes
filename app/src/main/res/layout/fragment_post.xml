@@ -25,7 +25,7 @@
 
             <FrameLayout
                 android:id="@+id/comment_posts"
-                android:layout_width="320dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0">
 
@@ -52,16 +52,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="57dp"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#222222">
 
                 <TextView
                     android:id="@+id/nameProfile"
-                    android:layout_width="match_parent"
+                    android:layout_width="264dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:text="TextView"
                     android:textAlignment="textStart"
@@ -72,11 +71,17 @@
 
             <FrameLayout
                 android:id="@+id/action_header"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="57dp"
                 android:layout_weight="0"
                 android:background="#222222">
 
+                <TextView
+                    android:id="@+id/datePost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="TextView"
+                    android:textColor="@color/white" />
             </FrameLayout>
 
         </LinearLayout>

@@ -42,6 +42,7 @@ class PostFragment : Fragment() {
         val binding:FragmentPostBinding = FragmentPostBinding.inflate(inflater,container,false)
         binding.titlePost.text = post?.title ?: ""
         binding.contentPost.text = post?.text ?: ""
+        binding.datePost.text = (post?.date ?: "").toString()
         post?.userId?.let { UserHandler.get(it).addOnSuccessListener{documentSnapshot->
             val user = UserHandler.documentSnapshotToDocument(documentSnapshot)
             if (user != null) {
