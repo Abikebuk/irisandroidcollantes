@@ -52,33 +52,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <FrameLayout
-                android:id="@+id/image_profile"
-                android:layout_width="80dp"
-                android:layout_height="57dp"
-                android:layout_weight="0"
-                android:background="#00ACC1"
-                android:clickable="false" >
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:src="@tools:sample/avatars" />
-            </FrameLayout>
-
-            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:layout_weight="1"
-                android:background="#039BE5">
+                android:background="#222222">
 
                 <TextView
                     android:id="@+id/nameProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:text="TextView"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -88,7 +75,7 @@
                 android:layout_width="80dp"
                 android:layout_height="57dp"
                 android:layout_weight="0"
-                android:background="#00ACC1">
+                android:background="#222222">
 
             </FrameLayout>
 
@@ -98,7 +85,7 @@
             android:id="@+id/contenu_posts"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:background="#353535"
+            android:background="#424242"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,16 +102,24 @@
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:text="TextView"
-                    android:textAlignment="viewStart"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="350dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="30dp" />
 
                 <TextView
                     android:id="@+id/contentPost"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:text="TextView"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -135,7 +130,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:background="#43A047"
+            android:background="#353535"
             app:layout_constraintTop_toBottomOf="@+id/footer_posts">
 
         </FrameLayout>

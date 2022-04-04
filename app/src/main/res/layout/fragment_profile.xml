@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="176dp"
             android:background="#0E0E0E"
-            app:cardBackgroundColor="#0E0E0E" >
+            app:cardBackgroundColor="#0E0E0E">
 
             <TextView
                 android:id="@+id/firstnameProfile"
@@ -40,6 +40,12 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.example.androidiris.NewsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

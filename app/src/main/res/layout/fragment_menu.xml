@@ -29,15 +29,6 @@
             android:text="Profile" />
 
         <Button
-            android:id="@+id/MenuChatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Chat" />
-
-        <Button
             android:id="@+id/MenuFriendsButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -45,5 +36,14 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Friends" />
+
+        <Button
+            android:id="@+id/MenuChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Logout" />
     </LinearLayout>
 </FrameLayout>
