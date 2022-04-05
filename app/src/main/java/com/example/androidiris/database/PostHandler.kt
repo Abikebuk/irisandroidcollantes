@@ -58,7 +58,7 @@ class PostHandler {
                     res.addAll(querySnapshotToPosts(Tasks.await(getAllFromUser(friend))))
                 }
             }
-            return res.sortedWith(compareBy { it.date });
+            return res.sortedWith(compareByDescending { it.date });
         }
 
         fun querySnapshotToPosts (querySnapshot: QuerySnapshot): ArrayList<Post> {
