@@ -10,6 +10,8 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
@@ -45,6 +47,18 @@ class PostHandler {
         fun getAllFromUser(userId : String): Task<QuerySnapshot> {
             val docRef = Firebase.firestore.collection(dbName).whereEqualTo("userId", userId).get()
             return docRef
+        }
+
+        suspend fun getAllFromUserAndFriend(userId: String): List<Post>{
+            val res = ArrayList<Post>()
+            res.addAll(querySnapshotToPosts(Tasks.await(getAllFromUser(userId))))
+            val user = UserHandler.documentSnapshotToDocument(Tasks.await(UserHandler.get(userId)))
+            if (user != null) {
+                for(friend in user.friends!!) {
+                    res.addAll(querySnapshotToPosts(Tasks.await(getAllFromUser(friend))))
+                }
+            }
+            return res.sortedWith(compareBy { it.date });
         }
 
         fun querySnapshotToPosts (querySnapshot: QuerySnapshot): ArrayList<Post> {

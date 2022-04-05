@@ -1,6 +1,7 @@
 package com.example.androidiris
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,13 @@ import com.example.androidiris.auth.Authenticate
 import com.example.androidiris.database.PostHandler
 import com.example.androidiris.databinding.FragmentNewsBinding
 import com.example.androidiris.databinding.FragmentPostBinding
+import com.google.firebase.firestore.local.LruGarbageCollector.Params.Default
+import com.squareup.okhttp.Dispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,18 +42,36 @@ class NewsFragment : Fragment() {
         }
 
         currentUser?.let {
-            PostHandler.getAllFromUser(it)
-                .addOnSuccessListener { querySnapshot ->
-                    val documents = PostHandler.querySnapshotToPosts(querySnapshot)
-                    val tr = childFragmentManager.beginTransaction()
-                    for(doc in documents){
-                        val post = PostFragment.newInstance(doc)
-                        tr.add(R.id.testWrapper,post)
+            if(param1 == "a"){
+                GlobalScope.async {
+                    withContext(Dispatchers.Default) {
+                        val documents = PostHandler.getAllFromUserAndFriend(it)
+                        for(doc in documents){
+                            Log.d("zeojizeiofj", doc.toString())
+                        }
+                        val tr = childFragmentManager.beginTransaction()
+                        for (doc in documents) {
+                            val post = PostFragment.newInstance(doc)
+                            tr.add(R.id.testWrapper, post)
+                        }
+                        tr.commitAllowingStateLoss()
                     }
-                    tr.commitAllowingStateLoss()
-                }
-        }
 
+                }
+            }
+            else {
+                PostHandler.getAllFromUser(it)
+                    .addOnSuccessListener { querySnapshot ->
+                        val documents = PostHandler.querySnapshotToPosts(querySnapshot)
+                        val tr = childFragmentManager.beginTransaction()
+                        for(doc in documents){
+                            val post = PostFragment.newInstance(doc)
+                            tr.add(R.id.testWrapper,post)
+                        }
+                        tr.commitAllowingStateLoss()
+                    }
+            }
+        }
     }
 
     override fun onCreateView(
