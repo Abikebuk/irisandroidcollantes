@@ -14,12 +14,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/friendListSearch"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:ems="10"
@@ -31,9 +34,10 @@
             <Button
 
                 android:id="@+id/friendListSearchButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:text="Search" />
 
         </LinearLayout>
 
