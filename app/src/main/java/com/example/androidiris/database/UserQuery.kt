@@ -18,7 +18,6 @@ class UserQuery (query: String){
     private var maxState = 0
     private val results : ArrayList<WeightedResult> = ArrayList()
 
-
     data class WeightedResult (val _user : User) {
         val user: User = _user
         var weight: Int = 0

@@ -55,10 +55,6 @@ class UserHandler {
                 .update("friends", FieldValue.arrayRemove(friendId))
         }
 
-        fun searchFriend(query : String){
-            query.split(' ')
-        }
-
         fun documentSnapshotToDocument(documentSnapshot : DocumentSnapshot): User? {
             val user = documentSnapshot.toObject<User>()
             user?.id = documentSnapshot.id
