@@ -17,6 +17,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         setContentView(binding.root)
+        changeView(ContentView.news)
     }
 
     fun changeView(view:ContentView){
