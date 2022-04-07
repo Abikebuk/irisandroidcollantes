@@ -41,7 +41,7 @@ class NewsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        currentUser?.let {
+        currentUser?.let { it ->
             if(param1 == "a"){
                 GlobalScope.async {
                     withContext(Dispatchers.Default) {
@@ -62,7 +62,7 @@ class NewsFragment : Fragment() {
             else {
                 PostHandler.getAllFromUser(it)
                     .addOnSuccessListener { querySnapshot ->
-                        val documents = PostHandler.querySnapshotToPosts(querySnapshot)
+                        val documents = PostHandler.querySnapshotToPosts(querySnapshot).sortedWith(compareByDescending { it.date })
                         val tr = childFragmentManager.beginTransaction()
                         for(doc in documents){
                             val post = PostFragment.newInstance(doc)
